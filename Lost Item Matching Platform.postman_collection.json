@@ -1,0 +1,461 @@
+{
+	"info": {
+		"_postman_id": "a3b1c2d3-e4f5-6789-0123-456789abcdef",
+		"name": "Lost Item Matching Platform",
+		"description": "Complete Postman API Collection for Lost Item Matching Platform.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8081",
+			"type": "string"
+		},
+		{
+			"key": "user1Id",
+			"value": "2",
+			"type": "string"
+		},
+		{
+			"key": "user2Id",
+			"value": "3",
+			"type": "string"
+		},
+		{
+			"key": "adminId",
+			"value": "1",
+			"type": "string"
+		}
+	],
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Register User 1",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"fullName\": \"John Doe\",\n  \"email\": \"user1@example.com\",\n  \"phone\": \"9876543210\",\n  \"password\": \"user123\",\n  \"confirmPassword\": \"user123\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/register",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "auth", "register"]
+						}
+					}
+				},
+				{
+					"name": "Register User 2",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"fullName\": \"Jane Smith\",\n  \"email\": \"user2@example.com\",\n  \"phone\": \"9123456789\",\n  \"password\": \"user234\",\n  \"confirmPassword\": \"user234\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/register",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "auth", "register"]
+						}
+					}
+				},
+				{
+					"name": "Login User 1",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"user1@example.com\",\n  \"password\": \"user123\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/login",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "auth", "login"]
+						}
+					}
+				},
+				{
+					"name": "Login User 2",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"user2@example.com\",\n  \"password\": \"user234\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/login",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "auth", "login"]
+						}
+					}
+				},
+				{
+					"name": "Get Current User",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "{{user1Id}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/me",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "auth", "me"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "User Profile",
+			"item": [
+				{
+					"name": "Get User Profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "{{user1Id}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/profile",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "users", "profile"]
+						}
+					}
+				},
+				{
+					"name": "Update User Profile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-User-Id",
+								"value": "{{user1Id}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"fullName\": \"Johnathan Doe\",\n  \"phone\": \"9998887771\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/users/profile",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "users", "profile"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Lost Items",
+			"item": [
+				{
+					"name": "Create Lost Item (Dell Laptop)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-User-Id",
+								"value": "{{user1Id}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Dell Inspiron 15\",\n  \"categoryId\": 3,\n  \"brand\": \"Dell\",\n  \"model\": \"Inspiron 15\",\n  \"color\": \"Silver\",\n  \"locationLost\": \"Bengaluru\",\n  \"dateLost\": \"2026-09-05\",\n  \"description\": \"Small scratch near logo\",\n  \"uniqueMark\": \"Blue sticker on back\",\n  \"contactInfo\": \"user1@example.com\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/lost-items",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "lost-items"]
+						}
+					}
+				},
+				{
+					"name": "Get All Lost Items",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "{{user1Id}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/lost-items",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "lost-items"]
+						}
+					}
+				},
+				{
+					"name": "Get Lost Item By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/lost-items/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "lost-items", "1"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Found Items",
+			"item": [
+				{
+					"name": "Create Found Item (Dell Laptop)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-User-Id",
+								"value": "{{user2Id}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Dell Inspiron 15\",\n  \"categoryId\": 3,\n  \"brand\": \"Dell\",\n  \"model\": \"Inspiron 15\",\n  \"color\": \"Silver\",\n  \"locationFound\": \"Bengaluru\",\n  \"dateFound\": \"2026-09-05\",\n  \"description\": \"Scratch near logo\",\n  \"uniqueMark\": \"Blue sticker on back\",\n  \"contactInfo\": \"user2@example.com\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/found-items",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "found-items"]
+						}
+					}
+				},
+				{
+					"name": "Search Found Items",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/found-items/search?name=Dell&location=Bengaluru",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "found-items", "search"],
+							"query": [
+								{ "key": "name", "value": "Dell" },
+								{ "key": "location", "value": "Bengaluru" }
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Matches",
+			"item": [
+				{
+					"name": "Get User Matches",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "{{user1Id}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/matches",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "matches"]
+						}
+					}
+				},
+				{
+					"name": "Get Match Details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/matches/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "matches", "1"]
+						}
+					}
+				},
+				{
+					"name": "Accept Match",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "{{user1Id}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/matches/1/accept",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "matches", "1", "accept"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Claims",
+			"item": [
+				{
+					"name": "Submit Claim",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-User-Id",
+								"value": "{{user1Id}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"matchId\": 1,\n  \"reason\": \"I lost my laptop on 05-09-2026 in Bengaluru.\",\n  \"verificationAnswers\": [\n    {\n      \"questionText\": \"Where exactly did you lose the item?\",\n      \"answerText\": \"Bengaluru Airport Gate 2\"\n    },\n    {\n      \"questionText\": \"Describe a unique mark on the item.\",\n      \"answerText\": \"Blue sticker on back near fan vents\"\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/claims",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "claims"]
+						}
+					}
+				},
+				{
+					"name": "Approve Claim",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "{{user2Id}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/claims/1/approve",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "claims", "1", "approve"]
+						}
+					}
+				},
+				{
+					"name": "Confirm Return (User 1)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "{{user1Id}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/claims/1/confirm-return",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "claims", "1", "confirm-return"]
+						}
+					}
+				},
+				{
+					"name": "Confirm Return (User 2)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "{{user2Id}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/claims/1/confirm-return",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "claims", "1", "confirm-return"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Admin Dashboard",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "{{adminId}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/admin/dashboard",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "admin", "dashboard"]
+						}
+					}
+				},
+				{
+					"name": "Admin Get Users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "{{adminId}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/admin/users",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "admin", "users"]
+						}
+					}
+				}
+			]
+		}
+	]
+}
